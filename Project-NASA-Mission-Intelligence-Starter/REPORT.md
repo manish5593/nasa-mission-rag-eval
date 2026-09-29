@@ -69,6 +69,24 @@ What the scores show:
 - **6** is limited by the data, not the code. The Apollo 13 files are transcripts and contain no accident report, so the cause of the explosion is not in the index. The retrieved passages describe the lunar module helium tank's burst disk, which the model mislabelled as the oxygen tank.
 - **7** shows faithfulness flagging an answer that leans on the model's own knowledge.
 
+### More fully grounded examples
+
+Each of these is factually correct, cited, and fully supported by the retrieved passages (faithfulness 1.000). Each was asked in a new conversation.
+
+| # | Question | Expected | Actual response | Relevancy | Faithfulness |
+|---|---|---|---|---|---|
+| 8 | When did Apollo 11 launch? | July 16, 1969, from Kennedy Space Center | "Apollo 11 launched on July 16, 1969, at 8:32 a.m. e.s.t. from Kennedy Space Center, Florida [Source 1][Source 2]." | 1.000 | 1.000 |
+| 9 | What was the call sign of the Apollo 11 lunar module? | Eagle | "The call sign of the Apollo 11 lunar module was "Eagle" [Source 3]." | 1.000 | 1.000 |
+| 10 | Who was the lunar module pilot on Apollo 11? | Buzz Aldrin | "The Lunar Module Pilot on Apollo 11 was Edwin E. Aldrin, Jr. [Source 1]" | 0.987 | 1.000 |
+| 11 | Who were the crew members of Apollo 13? | Lovell, Swigert, Haise | "Commander James A. (Jim) Lovell, Jr.; Command Module Pilot John L. (Jack) Swigert, Jr.; Lunar Module Pilot Fred W. Haise, Jr. [Source 1]" | 1.000 | 1.000 |
+| 12 | How did the Apollo 13 crew use the lunar module after the accident? | As a lifeboat for the return to Earth | "…the crew used the lunar module as a lifeboat to come back to Earth using its consumables for life support [Source 1]… using the lunar module's descent propulsion system for a transearth injection burn [Source 3]." | 0.719 | 1.000 |
+| 13 | What did mission control tell Challenger at throttle up? | "Challenger, go at throttle up" | "Mission control told Challenger "Challenger go with throttle up" at throttle up [146:26] [146:30]…" | 0.846 | 1.000 |
+
+Notes:
+
+- **12** scores lower on relevancy only because the answer also covers the return burn, which goes beyond the question.
+- **13** quotes the transcript's own wording ("go with throttle up"). It cites transcript timestamps instead of `[Source N]`, because the Challenger audio chunks carry timestamps like `[146:26]`.
+
 ## 4. Testing summary
 
 All three README checkpoints were verified by driving the running app in a headless browser and by scripted calls through the same code:
