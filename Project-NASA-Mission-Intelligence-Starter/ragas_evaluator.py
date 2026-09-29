@@ -18,18 +18,14 @@ def evaluate_response_quality(question: str, answer: str, contexts: List[str]) -
     if not RAGAS_AVAILABLE:
         return {"error": "RAGAS not available"}
 
-    # TODO: Create evaluator LLM with model gpt-3.5-turbo
     # The key and OPENAI_BASE_URL (Vocareum proxy) come from the environment. The
     # proxy can take ~15s to connect, so the default timeout is too tight.
     evaluator_llm = LangchainLLMWrapper(ChatOpenAI(model="gpt-3.5-turbo", timeout=120))
 
-    # TODO: Create evaluator_embeddings with model test-embedding-3-small
-    # "test-" is a typo in the TODO: the OpenAI model is text-embedding-3-small.
     evaluator_embeddings = LangchainEmbeddingsWrapper(
         OpenAIEmbeddings(model="text-embedding-3-small", timeout=120)
     )
 
-    # TODO: Define an instance for each metric to evaluate
     # Only reference-free metrics: the chat app has no ground-truth answer, so
     # BLEU, ROUGE and context precision "with reference" cannot be computed.
     metrics = {
@@ -39,7 +35,6 @@ def evaluate_response_quality(question: str, answer: str, contexts: List[str]) -
     if contexts:
         metrics["faithfulness"] = Faithfulness(llm=evaluator_llm)
 
-    # TODO: Evaluate the response using the metrics
     sample = SingleTurnSample(
         user_input=question,
         response=answer,
@@ -62,7 +57,6 @@ def evaluate_response_quality(question: str, answer: str, contexts: List[str]) -
         else:
             scores[name] = score
 
-    # TODO: Return the evaluation results
     if not scores:
         return {"error": "; ".join(errors) or "No metrics could be computed"}
 

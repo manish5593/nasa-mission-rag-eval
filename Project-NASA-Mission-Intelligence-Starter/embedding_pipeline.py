@@ -61,20 +61,16 @@ class ChromaEmbeddingPipelineTextOnly:
             chunk_size: Maximum size of text chunks
             chunk_overlap: Overlap between chunks
         """
-        # TODO: Initialize OpenAI client
         self.openai_client = OpenAI(api_key=openai_api_key)
-        # TODO: Store configuration parameters
         self.chroma_persist_directory = chroma_persist_directory
         self.collection_name = collection_name
         self.embedding_model = embedding_model
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
-        # TODO: Initialize ChromaDB client
         self.client = chromadb.PersistentClient(
             path = chroma_persist_directory,
             settings = Settings(anonymized_telemetry = False),
         )
-        # TODO: Create or get collection
         self.embedding_function = OpenAIEmbeddingFunction(
             api_key = openai_api_key,
             model_name = embedding_model,
