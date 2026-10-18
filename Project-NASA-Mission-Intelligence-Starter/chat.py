@@ -165,7 +165,7 @@ def main():
         
         if not available_backends:
             st.error("No ChromaDB backends found!")
-            st.info("Please run the embedding pipeline first:\n`python run_text_embedding.py`")
+            st.info("Please run the embedding pipeline first:\n`python embedding_pipeline.py --openai-key ... --data-path data_text --chunk-size 1000 --chunk-overlap 200`")
             st.stop()
         
         # Backend selection
